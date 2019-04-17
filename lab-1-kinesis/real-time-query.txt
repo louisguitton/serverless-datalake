@@ -1,0 +1,24 @@
+/**
+ * Welcome to the SQL editor
+ * =========================
+ * 
+ * The SQL code you write here will continuously transform your streaming data
+ * when your application is running.
+ *
+ * Get started by clicking "Add SQL from templates" or pull up the
+ * documentation and start writing your own custom queries.
+ */
+CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" ("userId" SMALLINT,
+"userID_count" INTEGER);
+-- Create pump to insert into output
+CREATE OR REPLACE PUMP "STREAM_PUMP" AS INSERT INTO
+"DESTINATION_SQL_STREAM"
+--Aggregate function
+-- COUNT|AVG|MAX|MIN|SUM|STDDEV_POP|STDDEV_SAMP|VAR_POP|VAR_SAMP)
+SELECT STREAM "userId", COUNT(*) AS "userID_count"
+FROM "SOURCE_SQL_STREAM_001"
+-- LIKE compares a string to a string pattern (_ matches all char, % matches substring)
+-- SIMILAR TO compares string to a regex, may use ESCAPE
+GROUP BY "userId", FLOOR(("SOURCE_SQL_STREAM_001".ROWTIME - TIMESTAMP
+'1970-01-01 00:00:00') SECOND / 10 TO SECOND);
+
