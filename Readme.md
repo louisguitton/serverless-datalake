@@ -1,4 +1,9 @@
 # 2019-04-16 - AWS Serverless Data Lake Immersion Day
+What we did was a mixture between the following 3 architectures:
+* https://aws.amazon.com/solutions/gaming-analytics-pipeline/?trk=sl_card
+* https://aws.amazon.com/solutions/streaming-analytics-pipeline/?trk=sl_card
+* https://aws.amazon.com/solutions/data-lake-solution/?trk=sl_card
+
 
 ## Lab 1: Kinesis Streams + Firehose + Analytics
 
